@@ -1,24 +1,61 @@
-//
-//  ContentView.swift
-//  Ios_Assignment3
-//
-//  Created by 서태준 on 5/13/24.
-//
-
 import SwiftUI
 
-struct Signin: View {
+struct SignIn: View {
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var isAuthenticated = false
+    @State private var showingAlert = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("I am sujin")
+        NavigationView {
+            VStack {
+                Image(systemName: "film")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 100)
+                    .padding(.top, 50)
+                
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                Button("Sign In") {
+                    // Perform sign-in logic here
+                    authenticateUser()
+                }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Error"), message: Text("Invalid email or password"), dismissButton: .default(Text("OK")))
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(10)
+                
+                NavigationLink("", destination: Home(), isActive: $isAuthenticated)
+                
+                Spacer()
+            }
+            .navigationTitle("Sign In")
         }
-        .padding()
     }
-}
+
+    func authenticateUser() {
+            let storedEmail = UserDefaults.standard.string(forKey: "userEmail") ?? ""
+            let storedPassword = UserDefaults.standard.string(forKey: "userPassword") ?? ""
+
+            if email == storedEmail && password == storedPassword {
+                isAuthenticated = true
+            } else {
+                showingAlert = true
+            }
+        }
+    }
 
 #Preview {
-    Signin()
+    SignIn()
 }
+
