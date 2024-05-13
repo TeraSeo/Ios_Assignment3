@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4381C9B2BF1D6B4003BD69C /* Ios_Assignment3App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4381C9A2BF1D6B4003BD69C /* Ios_Assignment3App.swift */; };
+		4C3190622BF1E3A70025E65D /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3190612BF1E3A70025E65D /* Main.swift */; };
 		C4381C9D2BF1D6B4003BD69C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4381C9C2BF1D6B4003BD69C /* ContentView.swift */; };
 		C4381C9F2BF1D6B6003BD69C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4381C9E2BF1D6B6003BD69C /* Assets.xcassets */; };
 		C4381CA22BF1D6B6003BD69C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4381CA12BF1D6B6003BD69C /* Preview Assets.xcassets */; };
@@ -34,8 +34,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C3190612BF1E3A70025E65D /* Main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 		C4381C972BF1D6B4003BD69C /* Ios_Assignment3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ios_Assignment3.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4381C9A2BF1D6B4003BD69C /* Ios_Assignment3App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ios_Assignment3App.swift; sourceTree = "<group>"; };
 		C4381C9C2BF1D6B4003BD69C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C4381C9E2BF1D6B6003BD69C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4381CA12BF1D6B6003BD69C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		C4381C992BF1D6B4003BD69C /* Ios_Assignment3 */ = {
 			isa = PBXGroup;
 			children = (
-				C4381C9A2BF1D6B4003BD69C /* Ios_Assignment3App.swift */,
+				4C3190612BF1E3A70025E65D /* Main.swift */,
 				C4381C9C2BF1D6B4003BD69C /* ContentView.swift */,
 				C4381C9E2BF1D6B6003BD69C /* Assets.xcassets */,
 				C4381CA02BF1D6B6003BD69C /* Preview Content */,
@@ -257,8 +257,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C3190622BF1E3A70025E65D /* Main.swift in Sources */,
 				C4381C9D2BF1D6B4003BD69C /* ContentView.swift in Sources */,
-				C4381C9B2BF1D6B4003BD69C /* Ios_Assignment3App.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
