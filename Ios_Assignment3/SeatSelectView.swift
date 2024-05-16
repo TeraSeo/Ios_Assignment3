@@ -1,24 +1,23 @@
 import SwiftUI
 
 struct SeatSelectView: View {
-    
-    var title: String
-    var subtitle: String
     var price: Int
+    var movie: Movie
+    var time: String
     
     let rows = 5
     let columns = 8
     @State private var selectedSeats: Set<String> = []
-    @State private var reservedSeats: Set<String>
+    @State private var reservedSeats: Set<String> = []
     
     let screenWidth: Double = UIScreen.main.bounds.width
     let screenHeight: Double = UIScreen.main.bounds.height
     
-    init(title: String, subtitle: String, price: Int) {
-        self.title = title
-        self.subtitle = subtitle
+    init(price: Int, movie: Movie, time: String) {
         self.price = price
-        reservedSeats = PersistenceManager.shared.getReservedSeats(title: title)
+        self.movie = movie
+        self.time = time
+        _reservedSeats = State(initialValue: PersistenceManager.shared.getReservedSeats(title: movie.title, time: time))
     }
     
     var body: some View {
@@ -26,19 +25,19 @@ struct SeatSelectView: View {
             VStack(alignment: .leading, spacing: 10) {
                 VStack {
                     HStack {
-                        Image("109602")
+                        Image(movie.title)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(width: screenWidth * 0.2, height: screenHeight * 0.2)
                             .padding(.trailing, 10)
                         
                         VStack(alignment: .leading) {
-                            Text(title)
+                            Text(movie.title)
                                 .font(.title)
                                 .fontWeight(.bold)
                                 .padding(.bottom, 5)
                             
-                            Text(subtitle)
+                            Text(movie.description)
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                             
@@ -89,7 +88,6 @@ struct SeatSelectView: View {
                                 .font(.headline)
                                 .foregroundColor(.red)
                         }
-                        
                     }
                     
                     Spacer()
@@ -100,7 +98,6 @@ struct SeatSelectView: View {
                         .frame(width: screenWidth * 0.4, height: screenHeight * 0.2)
                         .cornerRadius(8)
                         .padding(.trailing, 10)
-                    
                 }
                 .padding(.leading)
                 
@@ -142,7 +139,7 @@ struct SeatSelectView: View {
                 Spacer()
                 
                 // Seat selection confirm button
-                NavigationLink(destination: ReserveView(price: 13, title: title, subtitle: subtitle, selectedSeats: selectedSeats)) {
+                NavigationLink(destination: ReserveView(price: price, movie: movie, selectedSeats: selectedSeats, selectedTime: time)) {
                     Text("Confirm")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
@@ -153,7 +150,6 @@ struct SeatSelectView: View {
                         .padding(.horizontal)
                 }
                 .disabled(selectedSeats.isEmpty)
-                
             }
             .padding()
         }

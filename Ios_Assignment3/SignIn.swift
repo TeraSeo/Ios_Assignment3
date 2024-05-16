@@ -7,7 +7,6 @@ struct SignIn: View {
     @State private var showingAlert = false
 
     var body: some View {
-
         VStack {
             Image(systemName: "film")
                 .resizable()
@@ -43,23 +42,25 @@ struct SignIn: View {
             NavigationLink(destination: MainTabView(), isActive: $isAuthenticated) {
                 EmptyView()
             }
-                .hidden() // Hide the NavigationLink itself
+            .hidden() // Hide the NavigationLink itself
         )
     }
 
     func authenticateUser() {
-            let storedEmail = UserDefaults.standard.string(forKey: "userEmail") ?? ""
-            let storedPassword = UserDefaults.standard.string(forKey: "userPassword") ?? ""
-
-            if email == storedEmail && password == storedPassword {
-                isAuthenticated = true
-            } else {
-                showingAlert = true
-            }
+        let users = UserManager.shared.getUsers()
+        
+        if let user = users.first(where: { $0.email == email && $0.password == password }) {
+            PersistenceManager.initialize(username: user.name)
+            UserDefaults.standard.set(user.name, forKey: "loggedInUsername")
+            isAuthenticated = true
+        } else {
+            showingAlert = true
         }
     }
-
-#Preview {
-    SignIn()
 }
 
+struct SignIn_Previews: PreviewProvider {
+    static var previews: some View {
+        SignIn()
+    }
+}

@@ -19,6 +19,10 @@ struct TimeList: View {
         Showtime(time: "19:00", isAvailable: false),  // Example of an unavailable showtime
         Showtime(time: "21:30", isAvailable: true)
     ]
+    
+    var selectedShowtime: Showtime? {
+        showtimes.first { $0.id == selectedTime }
+    }
 
     var body: some View {
         VStack {
@@ -44,34 +48,19 @@ struct TimeList: View {
                 }
             }
             .listStyle(PlainListStyle())
+            
+            if let selectedShowtime = selectedShowtime {
+                NavigationLink(destination: SeatSelectView(price: 13, movie: movie, time: selectedShowtime.time)) {
+                    Text("Book a Movie")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.top, 20)
+            }
         }
         .navigationTitle("Showtimes")
     }
-    
-//    struct MainTabView: View {
-//        var body: some View {
-//            TabView {
-//                Home(key: UUID())
-//                    .tabItem {
-//                        Label("Home", systemImage: "house.fill")
-//                    }
-//
-//                ReservedView()
-//                    .tabItem {
-//                        Label("Reserved", systemImage: "list.bullet.rectangle")
-//                    }
-//            }
-//        }
-//    }
-//
-//    struct ReservedView: View {
-//        var body: some View {
-//            Text("Reserved Movies")
-//                .font(.title)
-//                .padding()
-//        }
-//    }
-//
-    
-    
 }

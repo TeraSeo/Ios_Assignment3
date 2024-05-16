@@ -28,16 +28,16 @@ class PersistenceManager {
         return reservations
     }
 
-    func getReservedSeats(title: String) -> Set<String> {
+    func getReservedSeats(title: String, time: String) -> Set<String> {
         var reservedSeats = Set<String>()
         for reservation in reservations {
-            if reservation.title == title {
+            if reservation.movie.title == title && reservation.time == time {
                 reservedSeats.formUnion(reservation.seats)
             }
         }
         return reservedSeats
     }
-
+    
     private func saveReservationsToFile() -> Bool {
         do {
             let data = try JSONEncoder().encode(reservations)

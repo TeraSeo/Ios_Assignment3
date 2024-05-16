@@ -9,10 +9,25 @@ struct ReservationDetailView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(reservation.title)
+            Text(reservation.movie.title)
                 .font(.largeTitle)
                 .fontWeight(.bold)
                 .padding(.bottom, 5)
+            
+            
+            Text(reservation.movie.description)
+                .font(.subheadline)
+                .padding(.bottom, 5)
+            
+            Spacer()
+            
+            Text("Time:")
+                .font(.headline)
+            Text(reservation.time)
+                .font(.subheadline)
+                .padding(.bottom, 5)
+            
+            Spacer()
             
             Text("Seats:")
                 .font(.headline)
@@ -51,7 +66,7 @@ struct ReservationDetailView: View {
                 })
             }
             .background(
-                NavigationLink(destination: HomeView(), isActive: $navigateToHome) {
+                NavigationLink(destination: MainTabView(), isActive: $navigateToHome) {
                     EmptyView()
                 }
             )

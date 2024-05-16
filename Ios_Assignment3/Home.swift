@@ -1,14 +1,4 @@
-import Foundation
 import SwiftUI
-
-// Movie model
-struct Movie: Identifiable, Hashable {
-    var id = UUID()
-    var title: String
-    var description: String
-    var runningtime: String
-    var imageName: String  // Assuming you have images in your Assets.xcassets
-}
 
 // Sample data for movies
 let sampleMovies = [
@@ -22,39 +12,52 @@ let sampleMovies = [
 
 struct Home: View {
     var movies: [Movie] = sampleMovies // This could be replaced by a dynamic data source
-//    var key: UUID
+    @State private var isSignedOut: Bool = false
     
     var body: some View {
-//        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    ForEach(movies) { movie in
-                        NavigationLink(destination: MovieDetailView(movie: movie)) {
-                            MovieRow(movie: movie)
-                        }
-                        .padding(.vertical, 4)
+        ScrollView {
+            VStack(alignment: .leading) {
+                ForEach(movies) { movie in
+                    NavigationLink(destination: MovieDetailView(movie: movie)) {
+                        MovieRow(movie: movie)
                     }
+                    .padding(.vertical, 4)
                 }
-                .padding()
+                
+                Spacer()
+                
+                
+                Button(action: {
+                    withAnimation {
+                        self.isSignedOut = true
+                    }
+                }) {
+                    HStack {
+                        Image(systemName: "power")
+                            .foregroundColor(.white)
+                        Text("Logout")
+                            .foregroundColor(.white)
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.red)
+                    .cornerRadius(10)
+                    .padding()
+                }
+                
             }
-            .navigationTitle("Movies")
-            .navigationBarTitleDisplayMode(.inline)
-//        }
-            .navigationDestination(for: Movie.self) { movie in
-                MovieDetailView(movie: movie)
-            }
-//            .id(key) Use the key here to refresh view
+            .padding()
         }
+        .navigationTitle("Movies")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationDestination(for: Movie.self) { movie in
+            MovieDetailView(movie: movie)
+        }
+        .background(
+            NavigationLink(destination: StartView(), isActive: $isSignedOut) {
+                EmptyView()
+            }
+            .hidden() // Hide the NavigationLink itself
+        )
     }
-
-
-
-//#Preview {
-//    Home()
-//}
-//// MARK: - Preview Provider
-//struct Home_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Home()  // Create an instance of Home for previewing
-//    }
-//}
+}

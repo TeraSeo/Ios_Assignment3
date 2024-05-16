@@ -7,7 +7,7 @@ struct MovieRow: View {
     
     var body: some View {
         HStack {
-            Image(movie.imageName) //This load movie image
+            Image(movie.title) //This load movie image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .frame(width: 60, height: 100)

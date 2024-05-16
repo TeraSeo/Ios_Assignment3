@@ -3,9 +3,9 @@ import SwiftUI
 struct ReserveView: View {
     
     var price: Int
-    var title: String
-    var subtitle: String
+    var movie: Movie
     var selectedSeats: Set<String>
+    var selectedTime: String
     
     let screenWidth: Double = UIScreen.main.bounds.width
     let screenHeight: Double = UIScreen.main.bounds.height
@@ -24,22 +24,25 @@ struct ReserveView: View {
             
             VStack {
                 HStack {
-                    Image("109602")
+                    Image(movie.title)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: screenWidth * 0.2, height: screenHeight * 0.2)
                         .padding(.trailing, 10)
                     
                     VStack(alignment: .leading) {
-                        Text(title)
+                        Text(movie.title)
                             .font(.title)
                             .fontWeight(.bold)
                             .padding(.bottom, 5)
                         
-                        Text(subtitle)
+                        Text(movie.description)
                             .font(.subheadline)
                             .foregroundColor(.gray)
                         
+                        Text(movie.runningtime)
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
                     }
                     
                     Spacer()
@@ -95,7 +98,7 @@ struct ReserveView: View {
             })
         }
         .background(
-            NavigationLink(destination: HomeView(), isActive: $navigateToHome) {
+            NavigationLink(destination: MainTabView(), isActive: $navigateToHome) {
                 EmptyView()
             } // navigate to home on reservation completed
         )
@@ -103,7 +106,7 @@ struct ReserveView: View {
     
     // save the reservation in a persistent file
     private func saveReservation() {
-        let reservation = Reservation(title: title, seats: sortedSeats)
+        let reservation = Reservation(movie: movie, seats: sortedSeats, time: selectedTime)
         if PersistenceManager.shared.saveReservation(reservation) {
             alertMessage = "Reservation succeeded!"
         } else {

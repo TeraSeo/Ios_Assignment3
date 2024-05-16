@@ -6,10 +6,10 @@ struct StartView: View {
         NavigationView {
             VStack {
                 Image("Cinema")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 300, height: 300)
-                                    .padding(.bottom, 20)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 300, height: 300)
+                    .padding(.bottom, 20)
                 
                 Text("UTS CINEMAS")
                     .font(.largeTitle)
@@ -25,6 +25,7 @@ struct StartView: View {
                         .background(Color.black)
                         .cornerRadius(10)
                 }
+                
                 NavigationLink(destination: SignIn()) {
                     Text("Sign In")
                         .font(.headline)
@@ -36,6 +37,7 @@ struct StartView: View {
             }
             .padding()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
