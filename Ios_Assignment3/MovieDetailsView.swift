@@ -8,7 +8,7 @@ struct MovieDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Image(movie.imageName)
+                Image(movie.title)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 300)
