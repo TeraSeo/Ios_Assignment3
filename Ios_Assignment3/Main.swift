@@ -1,8 +1,11 @@
-//
-//  Main.swift
-//  Ios_Assignment3
-//
-//  Created by 서태준 on 5/13/24.
-//
+import SwiftUI
 
-import Foundation
+@main
+struct Main: App { // App is handling the `main` function
+  var body: some Scene {
+    WindowGroup {
+      StartView()
+    }
+  }
+}
+
