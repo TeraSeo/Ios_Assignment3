@@ -1,8 +1,7 @@
-//
-//  Reservation.swift
-//  Ios_Assignment3
-//
-//  Created by 서태준 on 5/16/24.
-//
-
 import Foundation
+
+struct Reservation: Identifiable, Codable {
+    var id = UUID()
+    var title: String
+    var seats: [String]
+}
