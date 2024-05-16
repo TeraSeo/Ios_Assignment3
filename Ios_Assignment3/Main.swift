@@ -4,7 +4,8 @@ import SwiftUI
 struct Main: App { // App is handling the `main` function
   var body: some Scene {
     WindowGroup {
-      SignUp()
+      StartView()
     }
   }
 }
+

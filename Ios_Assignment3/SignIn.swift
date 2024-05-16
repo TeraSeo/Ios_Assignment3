@@ -7,40 +7,44 @@ struct SignIn: View {
     @State private var showingAlert = false
 
     var body: some View {
-        NavigationView {
-            VStack {
-                Image(systemName: "film")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .padding(.top, 50)
-                
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .padding()
-                
-                Button("Sign In") {
-                    // Perform sign-in logic here
-                    authenticateUser()
-                }
-                .alert(isPresented: $showingAlert) {
-                    Alert(title: Text("Error"), message: Text("Invalid email or password"), dismissButton: .default(Text("OK")))
-                }
+
+        VStack {
+            Image(systemName: "film")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 100, height: 100)
+                .padding(.top, 50)
+            
+            TextField("Email", text: $email)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
-                .foregroundColor(.white)
-                .background(Color.blue)
-                .cornerRadius(10)
-                
-                NavigationLink("", destination: Home(), isActive: $isAuthenticated)
-                
-                Spacer()
+            
+            SecureField("Password", text: $password)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+            
+            Button("Sign In") {
+                // Perform sign-in logic here
+                authenticateUser()
             }
-            .navigationTitle("Sign In")
+            .alert(isPresented: $showingAlert) {
+                Alert(title: Text("Error"), message: Text("Invalid email or password"), dismissButton: .default(Text("OK")))
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.red)
+            .cornerRadius(10)
+            
+            Spacer()
         }
+        .navigationTitle("Sign In")
+        .background(
+            // Use NavigationLink's new navigation triggering method
+            NavigationLink(destination: MainTabView(), isActive: $isAuthenticated) {
+                EmptyView()
+            }
+                .hidden() // Hide the NavigationLink itself
+        )
     }
 
     func authenticateUser() {
